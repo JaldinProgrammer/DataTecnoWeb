@@ -13,11 +13,10 @@ import postgresqlconnection.SqlConnection;
 
 /**
  *
- * @author carlos.jaldin
+ * @author VICTUS
  */
-public class User {
-
-    private final SqlConnection DB = new SqlConnection(
+public class Disease_symptom {
+     private final SqlConnection DB = new SqlConnection(
             "grupo20sc",
             "grup020grup020",
             "mail.tecnoweb.org.bo",
@@ -25,36 +24,28 @@ public class User {
             "db_grupo20sc"
     );
     public static final String[] HEADERS
-            = {"CI", "CELLPHONE", "EMAIL", "FULLNAME","ISDOCTOR", "GENRE"};
+                = {"ID_DESEASE", "ID_SYMPTOM"};
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
-            int ci,
-            String cellphone,
-            String email,
-            String fullname,
-            String genre,
-            String isdoctor
+            String id_desease,
+            String id_symptom
     ) throws SQLException {
 
         try {
-            String query = "INSERT INTO users "
-                    + "(ci, cellphone, email, fullname, gender, isdoctor)"
-                    + "values(?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO disease_symptoms "
+                    + "(id_desease, id_symptom)"
+                    + "values(?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setInt(1, ci);
-            ps.setString(2, cellphone);
-            ps.setString(3, email);
-            ps.setString(4, fullname);
-            ps.setString(5, genre);
-            ps.setBoolean(6, (isdoctor.equalsIgnoreCase("True")));
+            ps.setString(1, id_desease);
+            ps.setString(2, id_symptom);
             if (ps.executeUpdate() == 0) {
-                System.out.println("Error creating user"); 
+                System.out.println("Error creating Disease_symptoms"); 
                 throw new SQLException();
             }
-            return "User created with success";
+            return "Disease_symptoms created with success";
         } catch (Exception e) {
             System.out.println(e);
             return e.toString();
@@ -64,7 +55,7 @@ public class User {
     public List<String[]> display() throws SQLException {
         List<String[]> rows = new ArrayList<>();
 
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM disease_symptoms";
 
         PreparedStatement ps = DB.connect().prepareStatement(query);
 
@@ -72,55 +63,51 @@ public class User {
 
         while (set.next()) {
             rows.add(new String[]{
-                String.valueOf(set.getInt("ci")),
-                set.getString("cellphone"),
-                set.getString("email"),
-                set.getString("fullname"),
-                set.getString("isdoctor"),
-                set.getString("gender"),});
+                set.getString("id_desease"),
+                set.getString("id_symptom"),});
         }
         return rows;
     }
     
-    public String delete( String ci) throws SQLException{
+    public String delete( String id_desease, String id_symptom) throws SQLException{
         
         try{
-            String query = "DELETE FROM users WHERE ci = ?";
+            String query = "DELETE FROM disease_symptoms WHERE id_desease = ? and id_symptom= ? ";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, ci);
+            ps.setString(1, id_desease);
+            ps.setString(1, id_symptom);
 
             if (ps.executeUpdate() == 0) {
-                System.out.println("Error deleting user");
+                System.out.println("Error deleting Disease_symptoms");
                 throw new SQLException();
             }
-            return "user deleted correctly";
+            return "Disease_symptoms deleted correctly";
         }catch(Exception e){
             System.out.println(e);
             return e.toString();
         }
     }
     
-    public String update(int id, String nombre,String correo,String contrasena,String rol) throws SQLException{
+    public String update(int id_desease, String id_symptom,int newid_desease, String newid_symptom ) throws SQLException{
         
         try{
-            String query = "UPDATE usuarios SET nombre=?, correo=?, contrasena=?, rol=?"
-                    +"WHERE id = ?";
+            String query = "UPDATE disease_symptoms SET id_desease=?, id_symptom=?"
+                    +"WHERE id_desease=? and id_symptom=?";
 
              PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, nombre);
-            ps.setString(2, correo);
-            ps.setString(3, contrasena);
-            ps.setString(4, rol);
-            ps.setInt(5, id);
+             ps.setInt(1, newid_desease);
+            ps.setString(2, newid_symptom);
+            ps.setInt(3, id_desease);
+            ps.setString(4, id_symptom);
 
             if (ps.executeUpdate() == 0) {
-                System.out.println("Class DUsuario.java dice: Error al MODIFICAR usuario");
+                System.out.println("Class DDisease_symptoms.java dice: Error al MODIFICAR usuario");
                 throw new SQLException();
             }    
-            return "user updated correctly";
+            return "Disease_symptoms updated correctly";
         }catch(Exception e){
             System.out.println(e);
             return e.toString();
@@ -133,5 +120,4 @@ public class User {
             DB.closeConnection();
         }
     }
-
 }

@@ -13,10 +13,9 @@ import postgresqlconnection.SqlConnection;
 
 /**
  *
- * @author carlos.jaldin
+ * @author VICTUS
  */
-public class User {
-
+public class Promotions {
     private final SqlConnection DB = new SqlConnection(
             "grupo20sc",
             "grup020grup020",
@@ -25,36 +24,28 @@ public class User {
             "db_grupo20sc"
     );
     public static final String[] HEADERS
-            = {"CI", "CELLPHONE", "EMAIL", "FULLNAME","ISDOCTOR", "GENRE"};
+            = {"ID", "TITLE", "DESCRIPTION"};
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
-            int ci,
-            String cellphone,
-            String email,
-            String fullname,
-            String genre,
-            String isdoctor
+            String title,
+            String description
     ) throws SQLException {
 
         try {
-            String query = "INSERT INTO users "
-                    + "(ci, cellphone, email, fullname, gender, isdoctor)"
-                    + "values(?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO promotions "
+                    + "(title, description)"
+                    + "values(?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setInt(1, ci);
-            ps.setString(2, cellphone);
-            ps.setString(3, email);
-            ps.setString(4, fullname);
-            ps.setString(5, genre);
-            ps.setBoolean(6, (isdoctor.equalsIgnoreCase("True")));
+            ps.setString(1, title);
+            ps.setString(2, description);
             if (ps.executeUpdate() == 0) {
-                System.out.println("Error creating user"); 
+                System.out.println("Error creating promotions"); 
                 throw new SQLException();
             }
-            return "User created with success";
+            return "promotions created with success";
         } catch (Exception e) {
             System.out.println(e);
             return e.toString();
@@ -64,7 +55,7 @@ public class User {
     public List<String[]> display() throws SQLException {
         List<String[]> rows = new ArrayList<>();
 
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM promotions";
 
         PreparedStatement ps = DB.connect().prepareStatement(query);
 
@@ -72,55 +63,50 @@ public class User {
 
         while (set.next()) {
             rows.add(new String[]{
-                String.valueOf(set.getInt("ci")),
-                set.getString("cellphone"),
-                set.getString("email"),
-                set.getString("fullname"),
-                set.getString("isdoctor"),
-                set.getString("gender"),});
+                set.getString("id"),
+                set.getString("title"),
+                set.getString("description"),});
         }
         return rows;
     }
     
-    public String delete( String ci) throws SQLException{
+    public String delete( String id) throws SQLException{
         
         try{
-            String query = "DELETE FROM users WHERE ci = ?";
+            String query = "DELETE FROM promotions WHERE id = ?";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, ci);
+            ps.setString(1, id);
 
             if (ps.executeUpdate() == 0) {
-                System.out.println("Error deleting user");
+                System.out.println("Error deleting promotions");
                 throw new SQLException();
             }
-            return "user deleted correctly";
+            return "promotions deleted correctly";
         }catch(Exception e){
             System.out.println(e);
             return e.toString();
         }
     }
     
-    public String update(int id, String nombre,String correo,String contrasena,String rol) throws SQLException{
+    public String update(String id, String title,String description) throws SQLException{
         
         try{
-            String query = "UPDATE usuarios SET nombre=?, correo=?, contrasena=?, rol=?"
+            String query = "UPDATE promotions SET title=?, description=?"
                     +"WHERE id = ?";
 
              PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, nombre);
-            ps.setString(2, correo);
-            ps.setString(3, contrasena);
-            ps.setString(4, rol);
-            ps.setInt(5, id);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(5, id);
 
             if (ps.executeUpdate() == 0) {
-                System.out.println("Class DUsuario.java dice: Error al MODIFICAR usuario");
+                System.out.println("Class Dpromotions.java dice: Error al MODIFICAR promotions");
                 throw new SQLException();
             }    
-            return "user updated correctly";
+            return "promotions updated correctly";
         }catch(Exception e){
             System.out.println(e);
             return e.toString();

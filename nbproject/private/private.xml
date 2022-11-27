@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Carlos/Uagrm/TecnoWeb/proyecto-mail/BusinessData/src/data/User.java</file>
-            <file>file:/C:/Carlos/Uagrm/TecnoWeb/proyecto-mail/BusinessData/src/businessdata/BusinessData.java</file>
-            <file>file:/C:/Carlos/Uagrm/TecnoWeb/proyecto-mail/BusinessData/src/business/UserBusiness.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/business/UserBusiness.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/data/User.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/business/ReservatinoBusiness.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/utils/DateString.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/data/Promotions.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/postgresqlconnection/SqlConnection.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/business/PromotionsBusiness.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/businessdata/BusinessData.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/data/Diagnostics.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/data/Reservation.java</file>
+            <file>file:/C:/Codes/ZZweb/DataTecnoWeb/src/business/DiagnosticsBusiness.java</file>
         </group>
     </open-files>
 </project-private>
