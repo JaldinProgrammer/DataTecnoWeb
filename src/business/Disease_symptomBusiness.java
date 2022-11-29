@@ -23,8 +23,8 @@ public class Disease_symptomBusiness {
     public String create(List<String> params) throws SQLException{
         
         String res = ddsymptoms.create(
-                params.get(0), 
-                params.get(1)
+                Integer.parseInt(params.get(0)), 
+               Integer.parseInt(params.get(1))
         );
         
         ddsymptoms.disconnect();
@@ -37,9 +37,9 @@ public class Disease_symptomBusiness {
         return diagnostic_symptom;
     }
     
-    public String delete(String id_diagnostic, String id_symptom) throws SQLException{
+    public String delete(int id_diagnostic, int id_symptom) throws SQLException{
         
-        String res = ddsymptoms.delete(id_diagnostic,id_symptom);
+        String res = ddsymptoms.delete(id_diagnostic, id_symptom);
         
         ddsymptoms.disconnect();
         return res;
@@ -49,9 +49,9 @@ public class Disease_symptomBusiness {
         
         String res = ddsymptoms.update(
                 Integer.parseInt(params.get(0)), 
-                params.get(1),
+                Integer.parseInt(params.get(1)),
                 Integer.parseInt(params.get(2)), 
-                params.get(3)
+              Integer.parseInt(params.get(3))
                  
         );
         

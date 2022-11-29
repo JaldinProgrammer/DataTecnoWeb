@@ -28,19 +28,21 @@ public class Promotions {
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
+            int id,
             String title,
             String description
     ) throws SQLException {
 
         try {
             String query = "INSERT INTO promotions "
-                    + "(title, description)"
-                    + "values(?, ?)";
+                    + "(id, title, description)"
+                    + "values(?, ?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, title);
-            ps.setString(2, description);
+            ps.setInt(1, id);
+            ps.setString(2, title);
+            ps.setString(3, description);
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error creating promotions"); 
                 throw new SQLException();
@@ -70,14 +72,14 @@ public class Promotions {
         return rows;
     }
     
-    public String delete( String id) throws SQLException{
+    public String delete(int id) throws SQLException{
         
         try{
             String query = "DELETE FROM promotions WHERE id = ?";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id);
+            ps.setInt(1, id);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error deleting promotions");
@@ -90,7 +92,7 @@ public class Promotions {
         }
     }
     
-    public String update(String id, String title,String description) throws SQLException{
+    public String update(int id, String title,String description) throws SQLException{
         
         try{
             String query = "UPDATE promotions SET title=?, description=?"
@@ -100,7 +102,7 @@ public class Promotions {
 
             ps.setString(1, title);
             ps.setString(2, description);
-            ps.setString(5, id);
+            ps.setInt(3, id);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Class Dpromotions.java dice: Error al MODIFICAR promotions");

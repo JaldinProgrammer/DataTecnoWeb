@@ -7,6 +7,7 @@ package business;
 import data.Request_reservations;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,12 +24,12 @@ public class Request_reservationsBusiness {
     public String create(List<String> params) throws SQLException{
         
         String res = Rreservation.create(
-                params.get(0),
-                params.get(1), 
+                Integer.parseInt(params.get(0)), 
+               params.get( 1), 
                 params.get(2), 
                 params.get(3), 
                 params.get(4), 
-                params.get(5)
+                Integer.parseInt(params.get(5))
         );
         
         Rreservation.disconnect();

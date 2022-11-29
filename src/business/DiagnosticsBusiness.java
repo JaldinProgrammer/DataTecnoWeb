@@ -22,10 +22,12 @@ public class DiagnosticsBusiness {
     
     public String create(List<String> params) throws SQLException{
         
-        String res = Diagnostics.create(
-                params.get(0), 
-                params.get(1), 
-                params.get(2)
+        String res;
+        res = Diagnostics.create(
+                Integer.parseInt(params.get(0)), 
+                params.get(1),
+                params.get(2),
+                params.get(3)
         );
         
         Diagnostics.disconnect();

@@ -28,8 +28,8 @@ public class Diagnostic_symptom {
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
-            String id_diagnostic,
-            String id_symptom
+            int id_diagnostic,
+            int id_symptom
     ) throws SQLException {
 
         try {
@@ -39,8 +39,8 @@ public class Diagnostic_symptom {
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id_diagnostic);
-            ps.setString(2, id_symptom);
+            ps.setInt(1, id_diagnostic);
+            ps.setInt(2, id_symptom);
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error creating diagnostic_symptoms"); 
                 throw new SQLException();
@@ -69,15 +69,15 @@ public class Diagnostic_symptom {
         return rows;
     }
     
-    public String delete( String id_diagnostic, String id_symptom) throws SQLException{
+    public String delete( int id_diagnostic, int id_symptom) throws SQLException{
         
         try{
             String query = "DELETE FROM diagnostic_symptoms WHERE id_diagnostic = ? and id_symptom= ? ";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id_diagnostic);
-            ps.setString(1, id_symptom);
+            ps.setInt(1, id_diagnostic);
+            ps.setInt(2, id_symptom);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error deleting user");
@@ -90,7 +90,7 @@ public class Diagnostic_symptom {
         }
     }
     
-    public String update(int id_diagnostic, String id_symptom,int newid_diagnostic, String newid_symptom ) throws SQLException{
+    public String update(int id_diagnostic, int id_symptom,int newid_diagnostic, int newid_symptom ) throws SQLException{
         
         try{
             String query = "UPDATE diagnostic_symptoms SET id_diagnostic=?, id_symptom=?"
@@ -99,9 +99,9 @@ public class Diagnostic_symptom {
              PreparedStatement ps = DB.connect().prepareStatement(query);
 
              ps.setInt(1, newid_diagnostic);
-            ps.setString(2, newid_symptom);
+            ps.setInt(2, newid_symptom);
             ps.setInt(3, id_diagnostic);
-            ps.setString(4, id_symptom);
+            ps.setInt(4, id_symptom);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Class DUsuario.java dice: Error al MODIFICAR usuario");

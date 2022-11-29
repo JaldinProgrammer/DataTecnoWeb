@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import postgresqlconnection.SqlConnection;
 
 /**
@@ -24,31 +25,31 @@ public class Request_reservations {
             "db_grupo20sc"
     );
     public static final String[] HEADERS
-            = {"ID", "DATE", "DESCRIPTION", "START_TIME","END_TIME", "ID_USER"};
+            = {"ID", "DATETIME", "DESCRIPTION", "START_TIME","END_TIME", "ID_USER"};
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
-            String id,
-            String date,
+            int id,
+            String datetime,
             String description,
             String start_time,
             String end_time,
-            String id_user
+            int id_user
     ) throws SQLException {
 
         try {
             String query = "INSERT INTO request_reservations "
-                    + "(id, date, description, start_time, end_time, id_user)"
+                    + "(id, datetime, description, start_time, end_time, id_user)"
                     + "values(?, ?, ?, ?, ?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id);
-            ps.setString(2, date);
+            ps.setInt(1, id);
+             ps.setString(3, datetime);
             ps.setString(3, description);
             ps.setString(4, start_time);
             ps.setString(5, end_time);
-            ps.setString(6, id_user);
+            ps.setInt(6, id_user);
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error creating request_reservations"); 
                 throw new SQLException();

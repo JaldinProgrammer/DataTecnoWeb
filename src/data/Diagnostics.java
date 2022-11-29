@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import postgresqlconnection.SqlConnection;
 
 /**
@@ -101,20 +102,22 @@ public class Diagnostics {
     }
 
     public String create(
+            int id,
             String datatime,
             String id_user,
             String id_disease) 
     throws SQLException {
         try {
             String query = "INSERT INTO Diagnostics "
-                    + "(datatime, id_user, id_disease)"
-                    + "values(?, ?, ?)";
+                    + "(id, datatime, id_user, id_disease)"
+                    + "values(?, ?, ?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
             
-            ps.setString(1, datatime);
-            ps.setString(2, id_user);
-            ps.setString(3, id_disease);
+            ps.setInt(1, id);
+            ps.setString(2, datatime);
+            ps.setString(3, id_user);
+            ps.setString(4, id_disease);
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error creating Diagnostics"); 
                 throw new SQLException();

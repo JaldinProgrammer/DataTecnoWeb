@@ -24,23 +24,23 @@ public class Disease_symptom {
             "db_grupo20sc"
     );
     public static final String[] HEADERS
-                = {"ID_DESEASE", "ID_SYMPTOM"};
+                = {"ID_DISEASE", "ID_SYMPTOM"};
     // create, update, delete devuelven string
     // show, display  Array<String>
     public String create(
-            String id_desease,
-            String id_symptom
+            int id_desease,
+            int id_symptom
     ) throws SQLException {
 
         try {
             String query = "INSERT INTO disease_symptoms "
-                    + "(id_desease, id_symptom)"
+                    + "(id_disease, id_symptom)"
                     + "values(?, ?)";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id_desease);
-            ps.setString(2, id_symptom);
+            ps.setInt(1, id_desease);
+            ps.setInt(2, id_symptom);
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error creating Disease_symptoms"); 
                 throw new SQLException();
@@ -63,21 +63,21 @@ public class Disease_symptom {
 
         while (set.next()) {
             rows.add(new String[]{
-                set.getString("id_desease"),
+                set.getString("id_disease"),
                 set.getString("id_symptom"),});
         }
         return rows;
     }
     
-    public String delete( String id_desease, String id_symptom) throws SQLException{
+    public String delete( int id_desease, int id_symptom) throws SQLException{
         
         try{
-            String query = "DELETE FROM disease_symptoms WHERE id_desease = ? and id_symptom= ? ";
+            String query = "DELETE FROM disease_symptoms WHERE id_disease = ? and id_symptom= ? ";
 
             PreparedStatement ps = DB.connect().prepareStatement(query);
 
-            ps.setString(1, id_desease);
-            ps.setString(1, id_symptom);
+            ps.setInt(1, id_desease);
+            ps.setInt(2, id_symptom);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Error deleting Disease_symptoms");
@@ -90,18 +90,18 @@ public class Disease_symptom {
         }
     }
     
-    public String update(int id_desease, String id_symptom,int newid_desease, String newid_symptom ) throws SQLException{
+    public String update(int id_desease, int id_symptom,int newid_desease, int newid_symptom ) throws SQLException{
         
         try{
-            String query = "UPDATE disease_symptoms SET id_desease=?, id_symptom=?"
-                    +"WHERE id_desease=? and id_symptom=?";
+            String query = "UPDATE disease_symptoms SET id_disease=?, id_symptom=?"
+                    +"WHERE id_disease=? and id_symptom=?";
 
              PreparedStatement ps = DB.connect().prepareStatement(query);
 
              ps.setInt(1, newid_desease);
-            ps.setString(2, newid_symptom);
+            ps.setInt(2, newid_symptom);
             ps.setInt(3, id_desease);
-            ps.setString(4, id_symptom);
+            ps.setInt(4, id_symptom);
 
             if (ps.executeUpdate() == 0) {
                 System.out.println("Class DDisease_symptoms.java dice: Error al MODIFICAR usuario");

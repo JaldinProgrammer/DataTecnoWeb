@@ -23,8 +23,9 @@ public class PromotionsBusiness {
     public String create(List<String> params) throws SQLException{
         
         String res = promotions.create(
-                params.get(0), 
-                params.get(1)
+                Integer.parseInt(params.get(0)), 
+                params.get(1),
+                params.get(2)
         );
         
         promotions.disconnect();
@@ -37,7 +38,7 @@ public class PromotionsBusiness {
         return promotiones;
     }
     
-    public String delete(String id) throws SQLException{
+    public String delete(int id) throws SQLException{
         
         String res = promotions.delete(id);
         
@@ -48,7 +49,7 @@ public class PromotionsBusiness {
      public String update(List<String> params) throws SQLException{
         
         String res = promotions.update(
-                params.get(0), 
+                Integer.parseInt(params.get(0)), 
                 params.get(1),
                 params.get(2)
                  
